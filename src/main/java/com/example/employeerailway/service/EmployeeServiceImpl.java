@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -36,14 +37,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee createEmployee(EmployeeDTO employeeDTO) {
         Employee employee = fromEmployeeDTO(employeeDTO);
-        return null;
+        return employeeRepo.save(employee);
     }
 
 
 
     @Override
-    public Employee updateEmployee(Employee employee) {
-        return employeeRepo.save(employee);
+    public Employee updateEmployee(Employee employee,Long id) {
+        Employee existingEmployee = employeeRepo.findById(id).orElseThrow(()->new RuntimeException("Employee not found"));
+        if (Objects.nonNull(employee.getFirstName()) && !"".equalsIgnoreCase(employee.getFirstName())){
+            existingEmployee.setFirstName(employee.getFirstName());
+        }
+        if (Objects.nonNull(employee.getLastName()) && !"".equalsIgnoreCase(employee.getLastName())){
+            existingEmployee.setLastName(employee.getLastName());
+        }
+        if (Objects.nonNull(employee.getEmail()) && !"".equalsIgnoreCase(employee.getEmail())){
+            existingEmployee.setEmail(employee.getEmail());
+        }
+        return employeeRepo.save(existingEmployee);
     }
 
     @Override
