@@ -1,6 +1,8 @@
 package com.example.employeerailway;
 
+import com.example.employeerailway.model.Department;
 import com.example.employeerailway.model.Employee;
+import com.example.employeerailway.repository.DepartmentRepo;
 import com.example.employeerailway.repository.EmployeeRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +19,7 @@ public class EmployeeRailwayApplication {
 	}
 
 	@Bean
-	CommandLineRunner start(EmployeeRepo employeeRepo){
+	CommandLineRunner start(EmployeeRepo employeeRepo, DepartmentRepo departmentRepo){
 		return args -> {
 			employeeRepo.saveAll(
 				List.of(
@@ -27,6 +29,15 @@ public class EmployeeRailwayApplication {
 				)
 			);
 			employeeRepo.findAll().forEach(System.out::println);
+			departmentRepo.saveAll(
+					List.of(
+
+							Department.builder().name("informatique").code("IT").address("it@idihia.com").build(),
+							Department.builder().name("resources humaines").code("RH").address("rh@idihia.com").build(),
+							Department.builder().name("infrastructure").code("INFRA").address("infra@idihia.com").build()
+					)
+			);
+			departmentRepo.findAll().forEach(System.out::println);
 		};
 	}
 
