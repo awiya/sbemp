@@ -40,4 +40,9 @@ public class DepartmentController {
         departmentService.deleteDepartment((id));
     }
 
+    @GetMapping("/name/{name}")
+    public DepartmentDTO findDepartmentById(@PathVariable String name){
+        return departmentService.findDepartmentById(name);
+    }
+
 }

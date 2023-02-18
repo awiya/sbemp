@@ -55,6 +55,13 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepo.deleteById(id);
     }
 
+    @Override
+    public DepartmentDTO findDepartmentById(String name) {
+        Department department = departmentRepo.findByName(name);
+        return fromDepartment(department);
+
+    }
+
     private DepartmentDTO fromDepartment(Department department) {
         DepartmentDTO departmentDTO = DepartmentDTO.builder()
                 .name(department.getName())
