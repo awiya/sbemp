@@ -17,4 +17,6 @@ public interface DepartmentService {
     void deleteDepartment(Long id);
 
     DepartmentDTO findDepartmentById(String name);
+
+    List<DepartmentDTO> fetchDepartmentsByNameContains(String s);
 }

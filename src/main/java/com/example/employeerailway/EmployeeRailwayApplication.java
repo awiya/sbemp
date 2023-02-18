@@ -32,7 +32,10 @@ public class EmployeeRailwayApplication {
 			departmentRepo.saveAll(
 					List.of(
 
-							Department.builder().name("informatique").code("IT").address("it@idihia.com").build(),
+							Department.builder().name("informatique-SI").code("IT").address("it@idihia.com").build(),
+							Department.builder().name("informatique-BI").code("IT").address("it@idihia.com").build(),
+							Department.builder().name("informatique-SECURITY").code("IT").address("it@idihia.com").build(),
+							Department.builder().name("informatique-DATA").code("IT").address("it@idihia.com").build(),
 							Department.builder().name("resources humaines").code("RH").address("rh@idihia.com").build(),
 							Department.builder().name("infrastructure").code("INFRA").address("infra@idihia.com").build()
 					)

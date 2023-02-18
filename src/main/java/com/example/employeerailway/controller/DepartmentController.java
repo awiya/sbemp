@@ -45,4 +45,9 @@ public class DepartmentController {
         return departmentService.findDepartmentById(name);
     }
 
+    @GetMapping("/contains/{s}")
+    public List<DepartmentDTO> fetchDepartmentsByNameContains(@PathVariable String s){
+        return departmentService.fetchDepartmentsByNameContains(s);
+    }
+
 }

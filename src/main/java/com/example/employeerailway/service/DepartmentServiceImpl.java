@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -57,9 +58,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDTO findDepartmentById(String name) {
-        Department department = departmentRepo.findByName(name);
+        Department department = departmentRepo.findByNameIgnoreCase(name);
         return fromDepartment(department);
 
+    }
+
+    @Override
+    public List<DepartmentDTO> fetchDepartmentsByNameContains(String s) {
+        List<Department> byNameContaining = departmentRepo.findByNameContaining(s);
+        List<DepartmentDTO> departmentDTOS = byNameContaining.stream().map(department -> fromDepartment(department)).toList();
+        return departmentDTOS;
     }
 
     private DepartmentDTO fromDepartment(Department department) {
