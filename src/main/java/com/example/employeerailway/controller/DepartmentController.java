@@ -7,6 +7,7 @@ import com.example.employeerailway.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @PostMapping
-    public Department saveDepartment(DepartmentDTO departmentDTO){
+    public Department saveDepartment(@RequestBody @Valid DepartmentDTO departmentDTO){
         return departmentService.saveDepartment(departmentDTO);
     }
 
@@ -36,8 +37,9 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDepartment(@PathVariable Long id){
+    public String deleteDepartment(@PathVariable Long id){
         departmentService.deleteDepartment((id));
+        return String.format("Department with the id : %s, is deleted",id);
     }
 
     @GetMapping("/name/{name}")
